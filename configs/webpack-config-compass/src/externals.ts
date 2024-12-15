@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import fs from 'fs';
 
 export const sharedExternals: string[] = [
   // Electron should always stay external. For electron webpack target this
@@ -27,13 +27,10 @@ export const sharedExternals: string[] = [
 ];
 
 const monorepoWorkspaces = (
-  JSON.parse(
-    execSync('npx lerna list --all --json', {
-      encoding: 'utf-8',
-
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-  ) as { name: string; location: string }[]
+  JSON.parse(fs.readFileSync('../../workspaces.json').toString()) as {
+    name: string;
+    location: string;
+  }[]
 ).map((ws) => ws.name);
 
 export const pluginExternals: string[] = [
