@@ -480,7 +480,7 @@ void electronApp.dock?.hide();
 
 logger.log('[electron-proxy] starting proxy server on port %s', PROXY_PORT);
 
-const proxyServer = expressProxy.listen(PROXY_PORT, 'localhost');
+const proxyServer = expressProxy.listen(PROXY_PORT, '0.0.0.0');
 
 const websocketProxyServer = createWebSocketProxy();
 
