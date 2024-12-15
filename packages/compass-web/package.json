@@ -41,7 +41,7 @@
     "postcompile": "npm run typescript",
     "typescript": "tsc -p tsconfig-build.json --emitDeclarationOnly",
     "prestart": "npm run compile -w @mongodb-js/webpack-config-compass",
-    "start": "electron ./scripts/electron-proxy.js",
+    "start": "xvfb-maybe electron --no-sandbox ./scripts/electron-proxy.js",
     "analyze": "npm run webpack -- --mode production --analyze",
     "watch": "npm run webpack -- --mode development --watch",
     "sync": "node scripts/sync-dist-to-mms.js",
@@ -133,6 +133,7 @@
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2",
     "whatwg-url": "^13.0.0",
-    "ws": "^8.16.0"
+    "ws": "^8.16.0",
+    "xvfb-maybe": "^0.2.1"
   }
 }
