@@ -24,6 +24,15 @@
   ],
   "license": "SSPL",
   "main": "dist/index.js",
+  "targets": {
+    "server": {
+      "context": "node",
+      "source": "./scripts/server.js",
+      "distDir": "dist",
+      "isLibrary": false,
+      "sourceMap": false
+    }
+  },
   "compass:main": "src/index.tsx",
   "exports": {
     ".": "./dist/index.js",
@@ -37,11 +46,14 @@
   "scripts": {
     "prepublishOnly": "npm run compile && compass-scripts check-exports-exist",
     "compile": "npm run webpack -- --mode production",
+    "compile-sandbox": "webpack --config sandbox.webpack.config.js --env COMPASS_WEB_WS_PROXY_PORT=8080",
     "webpack": "webpack-compass",
     "postcompile": "npm run typescript",
     "typescript": "tsc -p tsconfig-build.json --emitDeclarationOnly",
     "prestart": "npm run compile -w @mongodb-js/webpack-config-compass",
-    "start": "xvfb-maybe electron --no-sandbox ./scripts/electron-proxy.js",
+    "start": "electron ./scripts/electron-proxy.js",
+    "start-sandbox": "node ./scripts/server.js",
+    "bundle-sandbox-server": "parcel build",
     "analyze": "npm run webpack -- --mode production --analyze",
     "watch": "npm run webpack -- --mode development --watch",
     "sync": "node scripts/sync-dist-to-mms.js",
@@ -134,6 +146,6 @@
     "vm-browserify": "^1.1.2",
     "whatwg-url": "^13.0.0",
     "ws": "^8.16.0",
-    "xvfb-maybe": "^0.2.1"
+    "parcel": "^2.12.0"
   }
 }

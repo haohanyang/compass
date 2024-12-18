@@ -37,3 +37,4 @@ config/*/.npmrc
 .evergreen/logs
 
 workspaces.json
+.parcel-cache/

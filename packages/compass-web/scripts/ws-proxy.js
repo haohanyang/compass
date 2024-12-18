@@ -45,10 +45,14 @@ async function resolveX509Cert({ projectId, clusterName }) {
  * flow starts by the frontend sending a connection options message after which
  * every follow-up message is directly written to the opened socket stream
  */
-function createWebSocketProxy(port = 1337, logger = console) {
-  const wsServer = new WebSocketServer({ host: '0.0.0.0', port }, () => {
-    logger.log('ws server listening at %s', wsServer.options.port);
-  });
+function createWebSocketProxy(server = null, port = 1337, logger = console) {
+  const wsServer = server
+    ? new WebSocketServer({ server: server }, () => {
+        logger.log('ws server listening at %s', server.address().port);
+      })
+    : new WebSocketServer({ host: 'localhost', port }, () => {
+        logger.log('ws server listening at %s', wsServer.options.port);
+      });
 
   const SOCKET_ERROR_EVENT_LIST = ['error', 'close', 'timeout', 'parseError'];
 
