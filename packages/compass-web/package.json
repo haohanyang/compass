@@ -46,7 +46,7 @@
   "scripts": {
     "prepublishOnly": "npm run compile && compass-scripts check-exports-exist",
     "compile": "npm run webpack -- --mode production",
-    "compile-sandbox": "webpack --config sandbox.webpack.config.js --env COMPASS_WEB_WS_PROXY_PORT=8080",
+    "compile-sandbox": "webpack --config sandbox.webpack.config.js --env COMPASS_WEB_WS_PROXY_PORT=8080 && cp ./sandbox/index.html ./sandbox/favicon.svg ./dist",
     "webpack": "webpack-compass",
     "postcompile": "npm run typescript",
     "typescript": "tsc -p tsconfig-build.json --emitDeclarationOnly",
