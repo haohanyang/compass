@@ -31,7 +31,7 @@ class Socket extends Duplex {
     tls?: boolean;
   }) {
     const { wsURL, ...atlasOptions } = lookup?.() ?? {};
-    this._ws = new WebSocket(wsURL ?? `ws://localhost:${WS_PROXY_PORT}`);
+    this._ws = new WebSocket(wsURL ?? 'ws://' + location.host);
     this._ws.binaryType = 'arraybuffer';
     this._ws.addEventListener(
       'open',
