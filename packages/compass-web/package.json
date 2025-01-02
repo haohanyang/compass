@@ -1,5 +1,5 @@
 {
-  "name": "@mongodb-js/compass-web",
+  "name": "@haohanyang/compass-web",
   "productName": "compass-web Plugin",
   "description": "Compass application packaged for the browser environment",
   "author": {
@@ -14,7 +14,7 @@
     "email": "compass@mongodb.com"
   },
   "homepage": "https://github.com/mongodb-js/compass",
-  "version": "0.12.2",
+  "version": "0.12.2-patch1",
   "repository": {
     "type": "git",
     "url": "https://github.com/mongodb-js/compass.git"
