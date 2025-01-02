@@ -30,6 +30,11 @@ jobs:
           npm run bootstrap-ci
         shell: bash
 
+      - name: Build compass-web
+        run: |
+          npm run prepublishOnly --workspace=@haohanyang/compass-web
+          cp LICENSE packages/compass-web
+
       - name: Publish compass-web
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
