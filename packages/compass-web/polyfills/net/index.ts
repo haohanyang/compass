@@ -2,9 +2,17 @@ import { ipVersion } from 'is-ip';
 import type { ConnectionOptions } from 'mongodb-data-service';
 import { Duplex } from 'stream';
 
-const WS_PROXY_PORT = process.env.COMPASS_WEB_WS_PROXY_PORT
-  ? Number(process.env.COMPASS_WEB_WS_PROXY_PORT)
-  : 1337;
+function getWsUrl() {
+  const loc = window.location;
+  let new_uri = "";
+  if (loc.protocol === "https:") {
+    new_uri = "wss:";
+  } else {
+    new_uri = "ws:";
+  }
+  new_uri += "//" + loc.host;
+  return new_uri;
+}
 
 /**
  * net.Socket interface that works over the WebSocket connection. For now, only
@@ -31,7 +39,7 @@ class Socket extends Duplex {
     tls?: boolean;
   }) {
     const { wsURL, ...atlasOptions } = lookup?.() ?? {};
-    this._ws = new WebSocket(wsURL ?? `ws://localhost:${WS_PROXY_PORT}`);
+    this._ws = new WebSocket(wsURL ?? getWsUrl());
     this._ws.binaryType = 'arraybuffer';
     this._ws.addEventListener(
       'open',
