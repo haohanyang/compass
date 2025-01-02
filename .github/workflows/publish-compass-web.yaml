@@ -9,22 +9,18 @@ jobs:
   publish:
     if: |
       startsWith(github.event.head_commit.message, '[release]')
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup git
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-      - name: "Use Node.js 14"
-        uses: actions/setup-node@v3
+      - name: "Use Node.js 20"
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.16.0
-
-      - name: Install npm@10.2.4
-        run: npm install -g npm@10.2.4
+          node-version: 20
+          cache: "npm"
 
       - name: Install Dependencies
         run: |
@@ -39,5 +35,6 @@ jobs:
       - name: Publish compass-web
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.DEVTOOLSBOT_NPM_TOKEN }}
         run: npm publish --provenance --access public
         working-directory: ./packages/compass-web
