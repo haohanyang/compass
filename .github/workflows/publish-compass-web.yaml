@@ -1,5 +1,6 @@
 name: Publish compass-web
 on:
+  workflow_dispatch:
   push:
     branches:
       - compass-web@0.12.2-patches
