@@ -13,11 +13,11 @@
     "url": "https://jira.mongodb.org/projects/COMPASS/issues",
     "email": "compass@mongodb.com"
   },
-  "homepage": "https://github.com/mongodb-js/compass",
+  "homepage": "https://github.com/haohanyang/compass",
   "version": "0.12.2-patch1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mongodb-js/compass.git"
+    "url": "https://github.com/haohanyang/compass.git"
   },
   "files": [
     "dist"
