@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: |
@@ -31,10 +32,17 @@ jobs:
         run: |
           npm run prepublishOnly --workspace=@haohanyang/compass-web
           cp LICENSE packages/compass-web
-
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: haohanyang-compass-web-0.12.2-patch1.tgz
+          path: |
+            packages/compass-web/dist
+            packages/compass-web/LICENSE
+            packages/compass-web/package.json
       - name: Publish compass-web
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.DEVTOOLSBOT_NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
         working-directory: ./packages/compass-web
