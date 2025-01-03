@@ -14,7 +14,7 @@
     "email": "compass@mongodb.com"
   },
   "homepage": "https://github.com/haohanyang/compass",
-  "version": "0.12.2-patch1",
+  "version": "0.12.2-patch2",
   "repository": {
     "type": "git",
     "url": "https://github.com/haohanyang/compass.git"
