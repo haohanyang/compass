@@ -27,15 +27,19 @@ export const sharedExternals: string[] = [
   '@mongosh/node-runtime-worker-thread',
 ];
 
-const monorepoWorkspaces = (
-  JSON.parse(
-    execSync('npx lerna list --all --json', {
-      encoding: 'utf-8',
+let monorepoWorkspaces: string[] = [];
 
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-  ) as { name: string; location: string }[]
-).map((ws) => ws.name);
+try {
+  monorepoWorkspaces = (
+    JSON.parse(
+      execSync('npx lerna list --all --json', {
+        encoding: 'utf-8',
+
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+    ) as { name: string; location: string }[]
+  ).map((ws) => ws.name);
+} catch (e) {}
 
 export const pluginExternals: string[] = [
   // All monorepo dependencies should be externalized
