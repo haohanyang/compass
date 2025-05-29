@@ -18,7 +18,7 @@
     "clean": "node -e \"fs.rmSync('lib', { recursive: true, force: true })\" || true",
     "precompile": "npm run clean",
     "compile": "webpack -- --mode production",
-    "postcompile": "tsc -p tsconfig.json",
+    "postcompile": "tsc -p tsconfig.json --emitDeclarationOnly",
     "eslint": "eslint-compass",
     "prettier": "prettier-compass",
     "lint": "npm run eslint . && npm run prettier -- --check .",
