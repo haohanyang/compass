@@ -12,7 +12,14 @@ const { promisify } = require('util');
 const execFileAsync = promisify(execFile);
 
 function localPolyfill(name) {
-  return path.resolve(__dirname, 'polyfills', ...name.split('/'), 'index.ts');
+  return path.resolve(
+    __dirname,
+    '..',
+    'compass-web',
+    'polyfills',
+    ...name.split('/'),
+    'index.ts'
+  );
 }
 
 /**
@@ -28,7 +35,7 @@ module.exports = (env, args) => {
   let config = createWebConfig({
     ...args,
     hot: serve,
-    entry: path.resolve(__dirname, serve ? 'sandbox' : 'src', 'index.tsx'),
+    entry: path.resolve(__dirname, 'src', 'index.ts'),
   });
 
   delete config.externals;
@@ -205,7 +212,7 @@ module.exports = (env, args) => {
   }
 
   config.output = {
-    path: config.output.path,
+    path: path.resolve(__dirname, 'lib'),
     filename: config.output.filename,
     library: {
       type: 'commonjs-static',

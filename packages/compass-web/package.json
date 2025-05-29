@@ -36,8 +36,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run compile && compass-scripts check-exports-exist",
-    "compile": "npm run webpack -- --mode production",
-    "webpack": "webpack-compass",
+    "compile": "webpack -- --mode production",
     "postcompile": "npm run typescript",
     "typescript": "tsc -p tsconfig-build.json --emitDeclarationOnly",
     "prestart": "npm run compile -w @mongodb-js/webpack-config-compass",

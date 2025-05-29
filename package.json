@@ -9,7 +9,8 @@
   "shortcutFolderName": "MongoDB",
   "license": "SSPL",
   "scripts": {
-    "bootstrap": "npm install && lerna run bootstrap --stream",
+    "bootstrap": "lerna run bootstrap --stream --ignore @mongodb-js/compass",
+    "pack-all": "lerna exec -- npm pack",
     "postbootstrap": "npm run compile --workspace=@mongodb-js/testing-library-compass",
     "bootstrap-ci": "npm ci && lerna run bootstrap",
     "postbootstrap-ci": "npm run postbootstrap",
