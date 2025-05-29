@@ -9,9 +9,8 @@
   "shortcutFolderName": "MongoDB",
   "license": "SSPL",
   "scripts": {
-    "bootstrap": "npm install && lerna run bootstrap --scope @mongodb-js/webpack-config-compass && lerna run bootstrap --stream --ignore @mongodb-js/compass",
+    "bootstrap": "npm install && lerna run bootstrap --stream --ignore @mongodb-js/compass",
     "pack-all": "lerna exec -- npm pack",
-    "postbootstrap": "npm run compile --workspace=@mongodb-js/compass-web",
     "bootstrap-ci": "npm ci && lerna run bootstrap",
     "postbootstrap-ci": "npm run postbootstrap",
     "precheck": "npm run depcheck && npm run check-logids && npm run check-leafygreen-dependency-usage",

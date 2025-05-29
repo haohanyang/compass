@@ -15,6 +15,8 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run bootstrap
+      - run: npm run compile --workspace=@mongodb-js/compass-web
+      - run: npm run build --workspace=@mongodb-js/compass-components
       - run: npm run pack-all
       - run: |
           mkdir pkgs
