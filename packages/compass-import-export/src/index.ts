@@ -8,6 +8,7 @@ import { preferencesLocator } from 'compass-preferences-model/provider';
 import { createLoggerLocator } from '@mongodb-js/compass-logging/provider';
 import { telemetryLocator } from '@mongodb-js/compass-telemetry/provider';
 import { connectionsLocator } from '@mongodb-js/compass-connections/provider';
+import { atlasServiceLocator } from '@mongodb-js/atlas-service/provider';
 
 /**
  * The import plugin.
@@ -24,6 +25,7 @@ export const ImportPlugin = registerHadronPlugin(
     preferences: preferencesLocator,
     logger: createLoggerLocator('COMPASS-IMPORT-UI'),
     track: telemetryLocator,
+    atlasService: atlasServiceLocator,
   }
 );
 

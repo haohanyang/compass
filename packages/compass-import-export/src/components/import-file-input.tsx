@@ -1,34 +1,34 @@
 import React, { useCallback } from 'react';
-import { FileInput } from '@mongodb-js/compass-components';
+import { FileInput2 } from '@mongodb-js/compass-components';
 
 type ImportFileInputProps = {
   autoOpen?: boolean;
   onCancel?: () => void;
-  selectImportFileName: (fileName: string) => void;
-  fileName: string;
+  selectImportFile: (file: File) => void;
+  file: File | null;
 };
 
 function ImportFileInput({
   autoOpen,
   onCancel,
-  selectImportFileName,
-  fileName,
+  selectImportFile,
+  file,
 }: ImportFileInputProps) {
   const handleChooseFile = useCallback(
-    (files: string[]) => {
+    (files: File[]) => {
       if (files.length > 0) {
-        void selectImportFileName(files[0]);
+        void selectImportFile(files[0]);
       } else if (typeof onCancel === 'function') {
         onCancel();
       }
     },
-    [onCancel, selectImportFileName]
+    [onCancel, selectImportFile]
   );
 
-  const values = fileName ? [fileName] : undefined;
+  const values = file ? [file] : undefined;
 
   return (
-    <FileInput
+    <FileInput2
       autoOpen={autoOpen}
       label="Import file:"
       id="import-file"

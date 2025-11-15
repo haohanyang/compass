@@ -24,6 +24,7 @@ import FileInput, {
   createJSDomFileInputDummyBackend,
   FileInputBackendProvider,
 } from './components/file-input';
+import FileInput2 from './components/file-input2';
 import { OptionsToggle } from './components/options-toggle';
 import {
   ErrorSummary,
@@ -109,6 +110,7 @@ export {
   ConfirmationModal,
   ErrorSummary,
   FileInput,
+  FileInput2,
   FileInputBackendProvider,
   IndexIcon,
   OptionsToggle,

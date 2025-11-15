@@ -24,10 +24,10 @@ import ImportPreviewLoader from './import-preview-loader';
 import { ImportOptions } from './import-options';
 import type { AcceptedFileType } from '../constants/file-types';
 import {
-  startImport,
+  startImport_,
   cancelImport,
   skipCSVAnalyze,
-  selectImportFileName,
+  selectImportFile,
   setDelimiter,
   setStopOnErrors,
   setIgnoreBlanks,
@@ -74,7 +74,7 @@ const dataTypesLinkStyles = css({
 type ImportModalProps = {
   isOpen: boolean;
   ns: string;
-  startImport: () => void;
+  startImport: (file: File) => void;
   cancelImport: () => void;
   skipCSVAnalyze: () => void;
   closeImport: () => void;
@@ -84,11 +84,11 @@ type ImportModalProps = {
   /**
    * See `<ImportOptions />`
    */
-  selectImportFileName: (fileName: string) => void;
+  selectImportFile: (file: File) => void;
   setDelimiter: (delimiter: Delimiter) => void;
   delimiter: Delimiter;
   fileType: AcceptedFileType | '';
-  fileName: string;
+  file: File | null;
   stopOnErrors: boolean;
   setStopOnErrors: (stopOnErrors: boolean) => void;
   ignoreBlanks: boolean;
@@ -121,11 +121,11 @@ function ImportModal({
   errors,
   status,
 
-  selectImportFileName,
+  selectImportFile,
   setDelimiter,
   delimiter,
   fileType,
-  fileName,
+  file,
   stopOnErrors,
   setStopOnErrors,
   ignoreBlanks,
@@ -167,7 +167,7 @@ function ImportModal({
     undefined
   );
 
-  if (isOpen && !fileName && errors.length === 0) {
+  if (isOpen && !file && errors.length === 0) {
     // Show the file input when we don't have a file to import yet.
     return (
       // Don't actually show it on the screen, just render it to trigger
@@ -176,8 +176,8 @@ function ImportModal({
         <ImportFileInput
           autoOpen
           onCancel={handleClose}
-          fileName={fileName}
-          selectImportFileName={selectImportFileName}
+          file={file}
+          selectImportFile={selectImportFile}
         />
       </div>
     );
@@ -196,8 +196,8 @@ function ImportModal({
           delimiter={delimiter}
           setDelimiter={setDelimiter}
           fileType={fileType}
-          fileName={fileName}
-          selectImportFileName={selectImportFileName}
+          file={file}
+          selectImportFile={selectImportFile}
           stopOnErrors={stopOnErrors}
           setStopOnErrors={setStopOnErrors}
           ignoreBlanks={ignoreBlanks}
@@ -246,11 +246,9 @@ function ImportModal({
       <ModalFooter>
         <Button
           data-testid="import-button"
-          onClick={startImport}
+          onClick={() => file && startImport(file)}
           disabled={
-            !fileName ||
-            status === STARTED ||
-            (fileType === 'csv' && !csvAnalyzed)
+            !file || status === STARTED || (fileType === 'csv' && !csvAnalyzed)
           }
           variant="primary"
         >
@@ -276,6 +274,7 @@ const mapStateToProps = (state: RootImportState) => ({
   isOpen: state.import.isOpen,
   errors: state.import.firstErrors,
   fileType: state.import.fileType,
+  file: state.import.file,
   fileName: state.import.fileName,
   status: state.import.status,
   delimiter: state.import.delimiter,
@@ -292,10 +291,10 @@ const mapStateToProps = (state: RootImportState) => ({
  * Export the connected component as the default.
  */
 export default connect(mapStateToProps, {
-  startImport,
+  startImport: startImport_,
   cancelImport,
   skipCSVAnalyze,
-  selectImportFileName,
+  selectImportFile,
   setDelimiter,
   setStopOnErrors,
   setIgnoreBlanks,

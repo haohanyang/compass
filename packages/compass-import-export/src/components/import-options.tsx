@@ -65,11 +65,11 @@ const delimiters: {
 ];
 
 type ImportOptionsProps = {
-  selectImportFileName: (fileName: string) => void;
+  selectImportFile: (file: File) => void;
   setDelimiter: (delimiter: Delimiter) => void;
   delimiter: Delimiter;
   fileType: AcceptedFileType | '';
-  fileName: string;
+  file: File | null;
   stopOnErrors: boolean;
   setStopOnErrors: (stopOnErrors: boolean) => void;
   ignoreBlanks: boolean;
@@ -77,11 +77,11 @@ type ImportOptionsProps = {
 };
 
 function ImportOptions({
-  selectImportFileName,
+  selectImportFile,
   setDelimiter,
   delimiter,
   fileType,
-  fileName,
+  file,
   stopOnErrors,
   setStopOnErrors,
   ignoreBlanks,
@@ -96,10 +96,7 @@ function ImportOptions({
 
   return (
     <form onSubmit={handleOnSubmit} className={formStyles}>
-      <ImportFileInput
-        fileName={fileName}
-        selectImportFileName={selectImportFileName}
-      />
+      <ImportFileInput file={file} selectImportFile={selectImportFile} />
       <Body as="h3" className={optionsHeadingStyles}>
         Options
       </Body>
