@@ -43,5 +43,6 @@ export const ExportPlugin = registerHadronPlugin(
     preferences: preferencesLocator,
     logger: createLoggerLocator('COMPASS-EXPORT-UI'),
     track: telemetryLocator,
+    atlasService: atlasServiceLocator,
   }
 );

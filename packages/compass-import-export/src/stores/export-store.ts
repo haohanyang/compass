@@ -14,6 +14,7 @@ import type { Logger } from '@mongodb-js/compass-logging/provider';
 import type { ActivateHelpers } from 'hadron-app-registry';
 import type { ConnectionsService } from '@mongodb-js/compass-connections/provider';
 import type { TrackFunction } from '@mongodb-js/compass-telemetry';
+import type { AtlasService } from '@mongodb-js/atlas-service/provider';
 
 export function configureStore(services: ExportPluginServices) {
   return createStore(
@@ -34,6 +35,7 @@ export type ExportPluginServices = {
   preferences: PreferencesAccess;
   logger: Logger;
   track: TrackFunction;
+  atlasService: AtlasService;
 };
 
 export type ExportThunkAction<R, A extends Action = AnyAction> = ThunkAction<
@@ -63,6 +65,7 @@ export function activatePlugin(
     preferences,
     logger,
     track,
+    atlasService,
   }: ExportPluginServices,
   { on, cleanup, addCleanup }: ActivateHelpers
 ) {
@@ -72,6 +75,7 @@ export function activatePlugin(
     preferences,
     logger,
     track,
+    atlasService,
   });
 
   on(
