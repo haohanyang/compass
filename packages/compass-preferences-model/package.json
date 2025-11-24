@@ -46,7 +46,7 @@
     "test-check-ci": "npm run check && npm test",
     "test": "mocha",
     "test-ci": "npm run test",
-    "reformat": "npm run eslint . -- --fix && npm run prettier -- --write ."
+    "reformat": "npm run prettier -- --write ."
   },
   "dependencies": {
     "@mongodb-js/compass-logging": "^1.6.8",

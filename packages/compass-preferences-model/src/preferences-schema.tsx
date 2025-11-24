@@ -137,6 +137,7 @@ export type CliOnlyPreferences = {
   help?: boolean;
   showExampleConfig?: boolean;
   trustedConnectionString?: boolean;
+  cloudBaseUrl?: string;
 };
 
 export type NonUserPreferences = {
@@ -1080,6 +1081,17 @@ const cliOnlyPreferencesProps: Required<{
     },
     validator: z.boolean().default(false),
     type: 'boolean',
+  },
+  cloudBaseUrl: {
+    ui: false,
+    cli: true,
+    global: false,
+    description: {
+      short: 'Override the base URL for Atlas API requests',
+      long: 'Specify an alternative base URL for Atlas API requests, e.g. to use a staging environment',
+    },
+    validator: z.string().optional(),
+    type: 'string',
   },
 };
 
