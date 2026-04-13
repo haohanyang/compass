@@ -145,6 +145,10 @@ export type NonUserPreferences = {
   file?: string;
   username?: string;
   password?: string;
+  wsBaseUrl?: string;
+  cloudBaseUrl?: string;
+  atlasApiBaseUrl?: string;
+  authPortalUrl?: string;
 };
 
 export type AtlasProjectPreferences = {
@@ -1137,6 +1141,50 @@ const nonUserPreferences: Required<{
       short: 'Specify a Password for Automatically Connecting',
     },
     validator: z.string().optional(),
+    type: 'string',
+  },
+  wsBaseUrl: {
+    ui: false,
+    cli: true,
+    global: true,
+    description: {
+      short: 'Websocket Base URL',
+      long: '',
+    },
+    validator: z.string(),
+    type: 'string',
+  },
+  cloudBaseUrl: {
+    ui: false,
+    cli: true,
+    global: true,
+    description: {
+      short: 'Cloud Base URL',
+      long: '',
+    },
+    validator: z.string(),
+    type: 'string',
+  },
+  atlasApiBaseUrl: {
+    ui: false,
+    cli: true,
+    global: true,
+    description: {
+      short: 'Atlas Api Base Url',
+      long: '',
+    },
+    validator: z.string(),
+    type: 'string',
+  },
+  authPortalUrl: {
+    ui: false,
+    cli: true,
+    global: true,
+    description: {
+      short: 'Auth Portal Url',
+      long: '',
+    },
+    validator: z.string(),
     type: 'string',
   },
 };

@@ -215,19 +215,21 @@ const config = {
 export function getAtlasConfig(
   preferences: Pick<PreferencesAccess, 'getPreferences'>
 ) {
-  const { atlasServiceBackendPreset } = preferences.getPreferences();
+  const { wsBaseUrl, cloudBaseUrl, atlasApiBaseUrl, authPortalUrl } =
+    preferences.getPreferences();
   const envConfig = {
-    atlasApiBaseUrl: process.env.COMPASS_ATLAS_SERVICE_UNAUTH_BASE_URL_OVERRIDE,
+    atlasApiBaseUrl,
     atlasLogin: {
       clientId: process.env.COMPASS_CLIENT_ID_OVERRIDE,
       issuer: process.env.COMPASS_OIDC_ISSUER_OVERRIDE,
     },
-    authPortalUrl: process.env.COMPASS_ATLAS_AUTH_PORTAL_URL_OVERRIDE,
+    authPortalUrl,
   };
-  return defaultsDeep(
-    envConfig,
-    config[atlasServiceBackendPreset]
-  ) as AtlasServiceConfig;
+
+  return defaultsDeep(envConfig, {
+    wsBaseUrl: wsBaseUrl,
+    cloudBaseUrl: cloudBaseUrl,
+  }) as AtlasServiceConfig;
 }
 
 export function getTrackingUserInfo(userInfo: AtlasUserInfo) {
