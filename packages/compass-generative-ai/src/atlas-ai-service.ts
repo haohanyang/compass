@@ -202,8 +202,8 @@ const aiURLConfig = {
     query: 'ai/api/v1/mql-query',
   },
   cloud: {
-    aggregation: (groupId: string) => `ai/v1/groups/${groupId}/mql-aggregation`,
-    query: (groupId: string) => `ai/v1/groups/${groupId}/mql-query`,
+    aggregation: (_groupId: string) => 'ai/mql-aggregation',
+    query: (_groupId: string) => 'ai/mql-query',
   },
 } as const;
 type AIEndpoint = 'query' | 'aggregation';
