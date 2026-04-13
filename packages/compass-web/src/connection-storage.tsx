@@ -285,9 +285,7 @@ export class AtlasCloudConnectionStorage
     ConnectionInfo[]
   > {
     const res = await this.atlasService.authenticatedFetch(
-      this.atlasService.cloudEndpoint(
-        `/explorer/v1/groups/${this.projectId}/clusters/connectionInfo`
-      )
+      this.atlasService.cloudEndpoint(`/connection-info`)
     );
 
     const connectionInfoList = (await res.json()) as ConnectionInfo[];
@@ -311,9 +309,7 @@ export class AtlasCloudConnectionStorage
             ...connectionInfo.connectionOptions,
             lookup: () => {
               return {
-                wsURL: this.atlasService.driverProxyEndpoint(
-                  `/clusterConnection/${this.projectId}`
-                ),
+                wsURL: this.atlasService.driverProxyEndpoint(`/ws`),
                 projectId: this.projectId,
                 clusterName,
               };
@@ -393,9 +389,7 @@ export class AtlasCloudConnectionStorage
           // (happens during deployment / termination / weird corner cases of
           // atlas cluster state)
           return buildConnectionInfoFromClusterDescription(
-            this.atlasService.driverProxyEndpoint(
-              `/clusterConnection/${this.projectId}`
-            ),
+            this.atlasService.driverProxyEndpoint(`/ws`),
             this.orgId,
             this.projectId,
             description,
