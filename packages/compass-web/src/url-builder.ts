@@ -5,6 +5,11 @@ import type {
 } from '@mongodb-js/compass-workspaces';
 import toNS from 'mongodb-ns';
 
+const baseRouteElement: HTMLMetaElement | null = document.querySelector(
+  'meta[name="base-route"]'
+);
+const baseRoute = baseRouteElement?.content || '';
+
 /**
  * This is specifically mapping from existing data explorer route params to
  * compass types, hence some routes not exactly matching the tab names
@@ -52,8 +57,10 @@ function getRouteFromCollectionSubTab(subTab: CollectionSubtab): string {
 export function getWorkspaceTabFromRoute(
   route: string
 ): OpenWorkspaceOptions | null {
-  const [, connectionId, db, coll, subTab] =
-    decodeURIComponent(route).split('/');
+  console.log('getWorkspaceTabFromRoute', route);
+  const [, connectionId, db, coll, subTab] = decodeURIComponent(
+    baseRoute ? route.substring(baseRoute.length + 1) : route
+  ).split('/');
 
   if (connectionId && db && coll) {
     const maybeSubTab = getCollectionSubTabFromRoute(subTab);
@@ -75,7 +82,7 @@ export function getWorkspaceTabFromRoute(
 
 function buildAbsoluteURL(...parts: string[]) {
   return (
-    '/' +
+    (baseRoute ? '/' + baseRoute + '/' : '/') +
     parts
       .map((part) => {
         return encodeURIComponent(part);
@@ -106,7 +113,7 @@ export function getRouteFromWorkspaceTab(tab: WorkspaceTab | null) {
       break;
     }
     default:
-      route = '/';
+      route = '/' + baseRoute;
   }
   return route;
 }
