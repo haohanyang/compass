@@ -3,7 +3,7 @@ import type { AnyAction } from 'redux';
 import type { ThunkAction } from 'redux-thunk';
 import type { WorkerRuntime } from '@mongosh/node-runtime-worker-thread';
 import { ObjectId } from 'bson';
-import { createWorkerRuntime } from '../modules/worker-runtime';
+import { createWorkerRuntime } from 'worker-runtime';
 import type { ShellPluginExtraArgs } from '../plugin';
 
 /**
