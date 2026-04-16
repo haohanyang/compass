@@ -309,7 +309,7 @@ export class AtlasCloudConnectionStorage
             ...connectionInfo.connectionOptions,
             lookup: () => {
               return {
-                wsURL: this.atlasService.driverProxyEndpoint(`/ws`),
+                wsURL: this.atlasService.driverProxyEndpoint('/mongo'),
                 projectId: this.projectId,
                 clusterName,
               };
@@ -389,7 +389,7 @@ export class AtlasCloudConnectionStorage
           // (happens during deployment / termination / weird corner cases of
           // atlas cluster state)
           return buildConnectionInfoFromClusterDescription(
-            this.atlasService.driverProxyEndpoint(`/ws`),
+            this.atlasService.driverProxyEndpoint('/mongo'),
             this.orgId,
             this.projectId,
             description,
