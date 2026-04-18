@@ -57,7 +57,6 @@ function getRouteFromCollectionSubTab(subTab: CollectionSubtab): string {
 export function getWorkspaceTabFromRoute(
   route: string
 ): OpenWorkspaceOptions | null {
-  console.log('getWorkspaceTabFromRoute', route);
   const [, connectionId, db, coll, subTab] = decodeURIComponent(
     baseRoute ? route.substring(baseRoute.length + 1) : route
   ).split('/');
